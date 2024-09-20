@@ -1,0 +1,35 @@
+{
+  "name": "vedi-survey",
+  "version": "0.0.0",
+  "scripts": {
+    "build": "webpack",
+    "start": "webpack serve --open",
+    "dev": "webpack --watch & nodemon dist/server.js"
+  },
+  "dependencies": {
+    "@jspsych/plugin-fullscreen": "^1.1.2",
+    "@jspsych/plugin-html-button-response": "^2.0.0",
+    "@jspsych/plugin-html-keyboard-response": "^1.1.2",
+    "@jspsych/plugin-preload": "^1.1.2",
+    "@jspsych/plugin-survey": "^2.0.0",
+    "css-loader": "^7.1.2",
+    "dotenv": "^16.4.5",
+    "jspsych": "^8.0.2",
+    "mongodb": "^6.9.0",
+    "socket.io": "^4.7.5",
+    "socket.io-client": "^4.7.5",
+    "style-loader": "^4.0.0"
+  },
+  "browserslist": ">0.25%, not dead",
+  "devDependencies": {
+    "@types/express": "^4.17.21",
+    "@types/node": "^22.5.5",
+    "html-webpack-plugin": "^5.6.0",
+    "nodemon": "^3.1.6",
+    "ts-loader": "^9.5.1",
+    "typescript": "^5.6.2",
+    "webpack": "^5.94.0",
+    "webpack-cli": "^5.1.4",
+    "webpack-dev-server": "^5.1.0"
+  }
+}
