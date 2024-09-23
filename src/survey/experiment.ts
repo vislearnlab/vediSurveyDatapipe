@@ -65,7 +65,7 @@ const failedSurveyQuestion = {
 const elibilityQuestion = {
   timeline: [failedSurveyQuestion],
   conditional_function: function(){
-      // if participant does not have a child in the required age range
+      // Check if participant said they did not have a child in the required age range
       const data = jsPsych.data.get().filterCustom((x: any) => Object.keys(x.response).includes("ChildEligibility")).values();
       return data.length > 0 && data[0].response.ChildEligibility == "No";
   }
@@ -104,16 +104,21 @@ function surveyQuestions() {
       showQuestionNumbers: false,
       elements:
         [
+            {
+              "type": "html",
+              "name": "rendered-html",
+              "html": '<div id="myprompt" style="position: absolute; white-space: nowrap; max-width: 100%; top: 10%; left: 50%; transform: translateX(-50%); text-align: center;">If you are unsure of your answers to any of the questions below please provide your best guess.</div>',
+            },
           {
             type: 'checkbox',
-            title: `In what formats has your child seen a ${OBJECTS[index]}?`, 
+            title: `In what formats do you think your child has seen a ${OBJECTS[index]}?`, 
             name: 'BallFormats', 
             choices: ['A drawing', 'A toy', 'A photo', 'A video', 'In real life', `Never seen a ${OBJECTS[index]}`], 
             isRequired: true
           },
           {
             type: 'radiogroup',
-            title: `How many different types of a ${OBJECTS[index]} has your child seen in real life (for example: red ball, blue ball)?`, 
+            title: `How many different types of a ${OBJECTS[index]} do you think your child has seen in real life (for example: red ${OBJECTS[index]}, blue ${OBJECTS[index]})?`, 
             name: 'FormatFrequency',
             transposeData: true,
             colCount: 0,
@@ -122,7 +127,7 @@ function surveyQuestions() {
           }, 
           {
             type: 'radiogroup',
-            title: `How often has your child seen a ${OBJECTS[index]}`, 
+            title: `How often do you think your child has seen a ${OBJECTS[index]}`, 
             name: 'FormatFrequency',
             transposeData: true,
             colCount: 0,
