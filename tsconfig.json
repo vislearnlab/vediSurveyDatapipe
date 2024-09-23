@@ -1,7 +1,9 @@
 {
     "compilerOptions": {
-      "target": "es5",
+      "target": "es2023",
       "module": "commonjs",
+      "moduleResolution": "node",
+      "isolatedModules": true,
       "strict": true,
       "esModuleInterop": true,
       "skipLibCheck": true,
