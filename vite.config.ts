@@ -3,6 +3,7 @@ import { resolve } from 'path';
 import { createHtmlPlugin } from 'vite-plugin-html';
 
 export default {
+  base: '/survey0701',
   plugins: [
     createHtmlPlugin({
       template: 'index.html',
