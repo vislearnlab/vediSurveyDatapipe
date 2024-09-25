@@ -1,12 +1,12 @@
 {
   "name": "vedi-survey",
   "version": "0.0.0",
-  "type": "module",
   "scripts": {
     "build": "vite build",
-    "start": "vite --host",
-    "dev": "vite",
-    "preview": "vite preview"
+    "client-dev": "vite",
+    "client-preview": "vite preview",
+    "dev": "nodemon src/server.ts",
+    "start": "vite build && ts-node src/server.ts"
   },
   "dependencies": {
     "@jspsych/plugin-fullscreen": "^1.1.2",
@@ -14,15 +14,18 @@
     "@jspsych/plugin-html-keyboard-response": "^1.1.2",
     "@jspsych/plugin-preload": "^1.1.2",
     "@jspsych/plugin-survey": "^2.0.0",
+    "@types/ws": "^8.5.12",
+    "cross-env": "^7.0.3",
     "css-loader": "^7.1.2",
     "dotenv": "^16.4.5",
+    "express": "^4.21.0",
     "jspsych": "^8.0.2",
     "mongodb": "^6.9.0",
-    "socket.io": "^4.7.5",
-    "socket.io-client": "^4.7.5",
     "style-loader": "^4.0.0",
+    "ts-node": "^10.9.2",
     "vite": "^5.4.7",
-    "vite-plugin-html": "^3.2.2"
+    "vite-plugin-html": "^3.2.2",
+    "ws": "^8.18.0"
   },
   "browserslist": ">0.25%, not dead",
   "devDependencies": {
