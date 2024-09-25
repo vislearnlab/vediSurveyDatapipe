@@ -11,9 +11,11 @@ const app = express();
 const PORT = process.env.PORT || 9000;
 
 let server;
+console.log(process.cwd());
+
 if (process.env.ENVIRONMENT === 'production') {
   // Location of credentials
-  const credentials = process.env.CREDENTIALS_PATH || '../credentials/';
+  const credentials = process.env.CREDENTIALS_PATH || 'credentials/';
   const options = {
     key: fs.readFileSync(`${credentials}ssl_key.pem`),
     cert: fs.readFileSync(`${credentials}ssl_cert.pem`),
@@ -49,7 +51,7 @@ app.get(`/${process.env.VITE_BASE_PATH}`, (req: Request, res: Response) => {
 });
 
 app.get('/*', (req: Request, res: Response) => {
-  res.send('Incorrect URL');
+   res.send('Incorrect URL');
 });
 
 // Listen to port on the server

@@ -9,8 +9,10 @@ import Survey from '@jspsych/plugin-survey';
 // Objects being used for the survey
 const OBJECTS = ["ball", "cat", "bottle"]//, "hand", "park", "lion", "spoon", "butterfly", "button", "staircase", "car", "lamp", "slide", "bucket", "kitchen", 
 
-// Need to update port config to be dynamic
-const ws = new window.WebSocket(`ws://localhost:9000`);
+const url = new URL(window.location.href);
+url.protocol = url.protocol.replace("http", "ws");
+url.pathname = url.pathname.replace(/\/$/, ""); // Remove trailing slash if it exists
+const ws = new window.WebSocket(`${url.href}/ws`);
 
 // Information that Prolific provides in the URL to tie user back to their study
 const urlParams = new URLSearchParams(window.location.search);
