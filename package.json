@@ -9,6 +9,7 @@
     "start": "vite build && ts-node src/server.ts"
   },
   "dependencies": {
+    "@jspsych/plugin-external-html": "^2.0.0",
     "@jspsych/plugin-fullscreen": "^1.1.2",
     "@jspsych/plugin-html-button-response": "^2.0.0",
     "@jspsych/plugin-html-keyboard-response": "^1.1.2",

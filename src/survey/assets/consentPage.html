@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Consent Page</title>
+</head>
+<body>
+  <p>
+    <img id="consentPage1">
+    <img id="consentPage2">
+    <img id="consentPage3">
+  </p>
+  <p>
+    <input type="checkbox" id="consent_checkbox" />
+    I agree to take part in this study.
+  </p>
+  <button type="button" id="start">Start Experiment</button>
+  <p id="error" style="color: red; display: none;">If you wish to participate, you must check the box next to the statement 'I agree to participate in this study.'</p>
+
+  <script>
+    // Remove any trailing slashes from the URL
+    let cleanedURL = window.location.href.replace(/\/+$/, '');
+    document.getElementById('consentPage1').src = cleanedURL + '/prolificConsentPage1.png';
+    document.getElementById('consentPage2').src = cleanedURL + '/prolificConsentPage2.png';
+    document.getElementById('consentPage3').src = cleanedURL + '/prolificConsentPage3.png';
+  </script>
+</body>
+</html>

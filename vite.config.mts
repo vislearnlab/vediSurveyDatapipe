@@ -18,6 +18,7 @@ export default defineConfig(({ mode }) => {
       rollupOptions: {
         output: {
           entryFileNames: 'assets/bundle.js',
+          assetFileNames: 'assets/[name].[extname]',
           dir: resolve(__dirname, 'dist'),
           manualChunks(id) {
             if (id.includes('node_modules')) {
@@ -27,6 +28,7 @@ export default defineConfig(({ mode }) => {
         },
       },
     },
+    publicDir: resolve(__dirname, 'src/survey/assets'), 
     // Server used in development mode
     server: {
       port: 9000,
