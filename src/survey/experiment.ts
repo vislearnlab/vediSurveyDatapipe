@@ -9,7 +9,10 @@ import Survey from '@jspsych/plugin-survey';
 import {Questions} from './constants';
 
 // Objects being used for the survey
-const OBJECTS = ["ball", "cat", "bottle"]//, "hand", "park", "lion", "spoon", "butterfly", "button", "staircase", "car", "lamp", "slide", "bucket", "kitchen", 
+const OBJECTS = ["ball", "cat", "bottle", "duck", "flower"]
+//, "hand", "garden", "lion", "spoon", "butterfly", "button", "stairs", "car", "lamp", "slide", "bucket", "kitchen", "penguin", "owl", "dog", "ear", "nose"
+//, "camera", "fork", "keys", "cup", "chair", "bread", "doll", "cookie", "plant", "blanket", "radio", "bird", "flag", "boat", "puzzle", "balloon", "pretzel"
+//, "chicken", "wagon", "computer"
 const NON_SURVEY_QUESTIONS = 4;
 
 const jsPsych = initJsPsych({
