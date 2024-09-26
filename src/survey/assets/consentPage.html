@@ -20,7 +20,8 @@
 
   <script>
     // Remove any trailing slashes from the URL
-    let cleanedURL = window.location.href.replace(/\/+$/, '');
+    let currentURL = new URL(window.location.href);
+    let cleanedURL = currentURL.origin + "" + currentURL.pathname.replace(/\/+$/, '');
     document.getElementById('consentPage1').src = cleanedURL + '/prolificConsentPage1.png';
     document.getElementById('consentPage2').src = cleanedURL + '/prolificConsentPage2.png';
     document.getElementById('consentPage3').src = cleanedURL + '/prolificConsentPage3.png';
