@@ -6,18 +6,11 @@ import HtmlKeyboardResponsePlugin from '@jspsych/plugin-html-keyboard-response';
 import HtmlButtonResponsePlugin from '@jspsych/plugin-html-button-response';
 import ExternalHtml from '@jspsych/plugin-external-html';
 import Survey from '@jspsych/plugin-survey';
+import {Questions} from './constants';
 
 // Objects being used for the survey
 const OBJECTS = ["ball", "cat", "bottle"]//, "hand", "park", "lion", "spoon", "butterfly", "button", "staircase", "car", "lamp", "slide", "bucket", "kitchen", 
 const NON_SURVEY_QUESTIONS = 4;
-
-// Questions asked for each object
-export enum Questions {
-  FormatsSeen,
-  Frequency,
-  RealExemplarCount,
-  TotalCount
-}
 
 const jsPsych = initJsPsych({
   show_progress_bar: true,

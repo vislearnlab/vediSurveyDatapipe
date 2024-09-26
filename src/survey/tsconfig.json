@@ -2,5 +2,6 @@
     "compilerOptions": {
       "module": "esnext",
     },
+    "includes": ["../**/*.ts"],
     "extends": "../../tsconfig.json"
   }

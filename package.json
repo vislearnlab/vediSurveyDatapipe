@@ -6,7 +6,8 @@
     "client-dev": "vite",
     "client-preview": "vite preview",
     "dev": "nodemon src/server.ts",
-    "start": "vite build && ts-node src/server.ts"
+    "start": "vite build && ts-node src/server.ts",
+    "pm2": "vite build && tsc && NODE_ENV=production pm2 start dist/server.js"
   },
   "dependencies": {
     "@jspsych/plugin-external-html": "^2.0.0",

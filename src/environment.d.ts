@@ -1,4 +1,4 @@
-import { Questions } from './survey/experiment';
+import {Questions} from './survey/constants';
 import 'vite/client';
 declare global {
     namespace NodeJS {
