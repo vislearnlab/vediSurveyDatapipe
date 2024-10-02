@@ -3,13 +3,14 @@
   "version": "0.0.0",
   "scripts": {
     "build": "vite build",
-    "client-dev": "vite",
-    "client-preview": "vite preview",
-    "dev": "nodemon src/server.ts",
-    "start": "vite build && ts-node src/server.ts",
-    "pm2": "vite build && tsc && NODE_ENV=production pm2 start dist/server.js"
+    "start": "vite",
+    "preview": "vite preview",
+    "dev:server": "nodemon src/server.ts",
+    "start:server": "vite build && ts-node src/server.ts",
+    "pm2:server": "vite build && tsc && NODE_ENV=production pm2 start dist/server.js"
   },
   "dependencies": {
+    "@jspsych-contrib/plugin-pipe": "^0.4.0",
     "@jspsych/plugin-external-html": "^2.0.0",
     "@jspsych/plugin-fullscreen": "^1.1.2",
     "@jspsych/plugin-html-button-response": "^2.0.0",

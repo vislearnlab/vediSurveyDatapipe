@@ -7,9 +7,10 @@ import HtmlButtonResponsePlugin from '@jspsych/plugin-html-button-response';
 import ExternalHtml from '@jspsych/plugin-external-html';
 import Survey from '@jspsych/plugin-survey';
 import {Questions} from './constants';
+import jsPsychPipe from '@jspsych-contrib/plugin-pipe';
 
 // Objects being used for the survey
-const OBJECTS = ["ball", "cat", "bottle", "duck", "flower"]
+const OBJECTS = ["ball", "cat"]//, "bottle", "duck", "flower"]
 //, "hand", "garden", "lion", "spoon", "butterfly", "button", "stairs", "car", "lamp", "slide", "bucket", "kitchen", "penguin", "owl", "dog", "ear", "nose"
 //, "camera", "fork", "keys", "cup", "chair", "bread", "doll", "cookie", "plant", "blanket", "radio", "bird", "flag", "boat", "puzzle", "balloon", "pretzel"
 //, "chicken", "wagon", "computer"
@@ -20,13 +21,13 @@ const jsPsych = initJsPsych({
   auto_update_progress_bar: true,
   message_progress_bar: 'Survey Progress',
   on_finish:  function(data: any) {
-    saveSurveyToDatabase(data);
+    //To save to Mongo: saveSurveyToDatabase(data);
     window.location.href = import.meta.env.VITE_COMPLETION_CODE ? `https://app.prolific.com/submissions/complete?cc=${import.meta.env.VITE_COMPLETION_CODE}` : "https://www.google.com";
   }
 }); 
 
 const socket = function() {
-  // WebSockets connection to the server
+  // WebSockets connection to the server to save data to the database
   const url = new URL(window.location.href);
   url.protocol = url.protocol.replace("http", "ws"); // uses wss:// if https:// and ws:// if http://
   url.pathname = url.pathname.replace(/\/$/, ""); // Remove trailing slash if it exists
@@ -197,7 +198,16 @@ const run = function(jsPsych: any) {
     type: HtmlKeyboardResponsePlugin,
     stimulus: "<p>Thanks for answering our questions. Press any key to complete the experiment. Thank you!</p>"
   }
-  timeline.push(consentTrial(), instructions, ...childEligibilityCheck(), childAgeQuestion, surveyProcedure, finalBlock);
+  const subject_id = jsPsych.randomization.randomID(10);
+  const filename = `${subject_id}.csv`; // ${subject_id}.json
+  let saveData = {
+    type: jsPsychPipe,
+    action: "save",
+    experiment_id: import.meta.env.VITE_EXPERIMENT_ID,
+    filename: filename,
+    data_string: ()=>jsPsych.data.get().csv() //JSON.stringify(formattedData(jsPsych.data.get()))
+  };
+  timeline.push(consentTrial(), instructions, ...childEligibilityCheck(), childAgeQuestion, surveyProcedure, finalBlock, saveData);
   jsPsych.run(timeline);
 }
 
@@ -206,11 +216,17 @@ run(jsPsych);
 
 // Logic to save survey data to database
 const saveSurveyToDatabase = function(rawSurveyData: any){
+  ws.send(JSON.stringify({ action: 'insert', data: { 
+    // Only including profic information when saving to secure database
+    prolificInformation: prolificInformation(),
+    ...formattedData(rawSurveyData)
+ } }));
+}
+
+const formattedData = function(rawSurveyData: any) {
   let [childAge, childSiblingAges] = agesInMonths(rawSurveyData);
   let trials = rawSurveyData.filterCustom((x: any) => Object.keys(x).includes("object")).values();
-  console.log(trials);
-  let surveyData: VEDI.SurveyData = {
-    prolificInformation: prolificInformation(),
+  let formattedSurveyData: VEDI.SurveyData = {
     childAge: childAge,
     childSiblingAges: childSiblingAges,
     trialData: trials.map((trial: any) => ({
@@ -220,7 +236,7 @@ const saveSurveyToDatabase = function(rawSurveyData: any){
       ...Object.fromEntries(Object.entries(trial.response).filter(([k,_v]) => Object.keys(Questions).includes(k)))
     }))
   }
-  ws.send(JSON.stringify({ action: 'insert', data: surveyData }))
+  return formattedSurveyData;
 }
 
 const prolificInformation = function():Study.ProlificInformation {
