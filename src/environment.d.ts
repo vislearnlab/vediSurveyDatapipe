@@ -32,7 +32,7 @@ declare global {
             [key: Questions]: string | string[];
         }
         interface SurveyData {
-            prolificInformation: ProlificInformation;
+            prolificInformation?: ProlificInformation;
             // Ages in months
             childAge: number;
             childSiblingAges: number[];
